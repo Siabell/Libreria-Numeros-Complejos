@@ -96,6 +96,10 @@ public class ComplexNumber  {
        return nuevoComplex; 
     }
     
+    public ComplexNumber negation (){
+    	ComplexNumber nuevoComplex = new ComplexNumber((this.getParteReal()*-1),(this.getParteImaginaria()*-1));
+       return nuevoComplex; 
+    }
     
     public ComplexNumber polarRepresentation (){
        double p = Math.sqrt(Math.pow(parteReal, 2)+Math.pow(parteImaginaria, 2));
