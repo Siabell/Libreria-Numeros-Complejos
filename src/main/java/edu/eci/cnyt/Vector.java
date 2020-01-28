@@ -1,6 +1,6 @@
 package edu.eci.cnyt;
 
-public class ComplexVector extends Exception {
+public class Vector extends Exception {
 	
 	private ComplexNumber[] entries;
 	
@@ -10,11 +10,11 @@ public class ComplexVector extends Exception {
 	}
 
 
-	public ComplexVector (ComplexNumber[] entries) {
+	public Vector (ComplexNumber[] entries) {
 		this.entries = entries;
 	}
 	
-	public ComplexVector (Double[][] entries) {
+	public Vector (Double[][] entries) {
 		//hashset
 		
 	}
@@ -29,30 +29,28 @@ public class ComplexVector extends Exception {
 	 * @param vectorAdd: vector to add
 	 * @return
 	 */
-	public ComplexVector addition (ComplexVector vectorAdd) {
-		if (vectorAdd.getLenght() == this.getLenght()) {
-			
-			
+	public Vector addition (Vector vectorAdd) {
+		if (vectorAdd.getLenght() == this.getLenght()) {	
 		}
 		ComplexNumber[] newEntriesVector = new ComplexNumber[this.getLenght()];
 		ComplexNumber[] entriesVector = vectorAdd.getEntries();
 		for (int i = 0; i < entries.length; i++) {
 			newEntriesVector[i] = this.entries[i].add(entriesVector[i]);
 		}
-		ComplexVector newVector = new ComplexVector(newEntriesVector);
+		Vector newVector = new Vector(newEntriesVector);
 		return newVector;
 	}
 	
 	/**
-	 * (additive) inverse (or negative) of a ComplexVector
+	 * (additive) inverse (or negative) of a Vector
 	 * @return newVector
 	 */
-	public ComplexVector inverse () {
+	public Vector inverse () {
 		ComplexNumber[] newEntriesVector = new ComplexNumber[this.getLenght()];
 		for (int i = 0; i < entries.length; i++) {
 			newEntriesVector[i] = this.entries[i].negation();
 		}
-		ComplexVector newVector = new ComplexVector(newEntriesVector);
+		Vector newVector = new Vector(newEntriesVector);
 		return newVector;
 	}
 	
@@ -61,13 +59,13 @@ public class ComplexVector extends Exception {
 	 * @param multNumber : an complex number to be multiplied
 	 * @return newVector
 	 */
-	public ComplexVector multiplyForAScalarComplex (ComplexNumber multNumber) {
+	public Vector multiplyForAScalarComplex (ComplexNumber multNumber) {
 		ComplexNumber[] newEntriesVector = new ComplexNumber[this.getLenght()];
 		for (int i = 0; i < entries.length; i++) {
 			newEntriesVector[i] = this.entries[i].multiplication(multNumber);
 			
 		}
-		ComplexVector newVector = new ComplexVector(newEntriesVector);
+		Vector newVector = new Vector(newEntriesVector);
 		return newVector;
 	}
 
