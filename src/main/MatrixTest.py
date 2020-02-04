@@ -45,13 +45,14 @@ class ComplexNumberTest(unittest.TestCase):
         mSol =  matrix.Matrix([[complex.ComplexNumber(6, 3), complex.ComplexNumber(0, 0),complex.ComplexNumber(1, 0)], [complex.ComplexNumber(2, -12), complex.ComplexNumber(5, -2.1),complex.ComplexNumber(2, -5)],[complex.ComplexNumber(0, 19), complex.ComplexNumber(17, 0),complex.ComplexNumber(3, 4.5)]])
         self.assertTrue(mTest.equals(mSol))
     
-    #def testInnerProductMatrices(self):
     '''
     def testNorm (self):
         m1 = matrix.Matrix([[complex.ComplexNumber(4, 3), complex.ComplexNumber(6,-4),complex.ComplexNumber(12, -7), complex.ComplexNumber(0, 13)]])
         mTest = m1.norm()
         mSol =  6.855
         self.assertEquals(mTest, mSol) '''
+
+    
 
 
 if __name__ == '__main__':

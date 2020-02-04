@@ -9,7 +9,7 @@ class Matrix:
         self.n = len(pmatrix) #column
 
     def add (self, mat2):
-        """ Suma de dos matrices """
+        """ Suma de dos matrices/vectores """
         if (self.m != mat2.m and self.n != mat2.n):
             raise Exception('The dimensions of the matrices are not the same ')
         else:
@@ -21,7 +21,7 @@ class Matrix:
             return matResult
 
     def subtract (self, mat2):
-        """ Resta de dos matrices """
+        """ Resta de dos matrices/vectores """
         if (self.m != mat2.m and self.n != mat2.n):
             raise Exception('The dimensions of the matrices are not the same ')
         else:
@@ -33,7 +33,7 @@ class Matrix:
             return matResult
 
     def inverse (self):
-        """ Inversa de una matriz"""
+        """ Inversa de una matriz/vectore"""
         matrixResult = [[complex.ComplexNumber(0,0) for x in range(self.m)] for y in range(self.n)] 
         for i in range (self.m):
             for j in range (self.n):
@@ -42,7 +42,7 @@ class Matrix:
         return matResult
     
     def scalarMultiplication(self,c):
-        """ Producto escalar de una matrix y un numero complejo c """
+        """ Producto escalar de una matrix/vector y un numero complejo c """
         matrixResult = [[complex.ComplexNumber(0,0) for x in range(self.m)] for y in range(self.n)] 
         for i in range (self.m):
             for j in range (self.n):
@@ -109,7 +109,32 @@ class Matrix:
         """ norma de una matriz: raiz del producto interno de la misma matriz """
         result = math.sqrt(self.innerProduct(self))
         return round(result,3)
-        
+    
+    def tensorProduct(self,mat2):
+        "producto tensor"
+        matrixResult = [[complex.ComplexNumber(0,0) for x in range(self.m*mat2.m)] for y in range(self.n*mat2.n)] 
+        for i in range (self.m):
+            for j in range (self.n):
+                matriz = mat2.scalarMultiplication(self.mtx[i][j])
+                matrixResult = self.fillTensor(matrixResult,matriz,i,j)
+        matResult = Matrix(matrixResult)
+        return matResult
+    
+    def fillTensor(self,matrixResult,add,rows,colums):
+        inicioI = add.m*rows
+        inicioJ = add.n*colums
+        finI=inicioI+add.m
+        finJ=inicioJ+add.n
+        realI=0
+        realJ=0
+        for i in range(inicioI,finI):
+            for j in range(inicioJ,finJ):
+                matrixResult[i][j]=add.mtx[realI][realJ]
+                realJ=realJ+1
+            realJ=0
+            realI=realI+1
+        return matrixResult
+    
 
     def equals(self,mat2):
         """ Compara si los elementos de las matrices son iguales """
@@ -127,3 +152,5 @@ class Matrix:
             for j in range(self.n):
                 print(self.mtx[i][j].partReal,self.mtx[i][j].partImag)
             print("-----")
+
+   
