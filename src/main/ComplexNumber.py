@@ -19,8 +19,8 @@ class ComplexNumber:
 
     def multiplication(nComplex1,nComplex2):
         """ multiplicar dos numeros complejos """
-        real=(nComplex1.partReal*nComplex2.partReal)-(nComplex1.partImag*nComplex2.partImag)
-        imag=(nComplex1.partReal*nComplex2.partImag)+(nComplex1.partImag*nComplex2.partReal)
+        real=round((nComplex1.partReal*nComplex2.partReal)-(nComplex1.partImag*nComplex2.partImag),3)
+        imag=round((nComplex1.partReal*nComplex2.partImag)+(nComplex1.partImag*nComplex2.partReal),3)
         return ComplexNumber(real,imag)
 
     def division(nComplex1,nComplex2):
@@ -56,5 +56,6 @@ class ComplexNumber:
         nComplex.partImag = nComplex.partImag*-1
 
     def showNumber(num):
-        print(num.partReal,num.partImag)
+        strNum = "[ "+str(num.partReal)+" "+str(num.partImag)+"i ]"
+        return strNum
 

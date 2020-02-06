@@ -1,6 +1,7 @@
 import unittest
 import ComplexNumber as complex
 import Matrix as matrix
+import math
 
 class ComplexNumberTest(unittest.TestCase):
 
@@ -45,14 +46,33 @@ class ComplexNumberTest(unittest.TestCase):
         mSol =  matrix.Matrix([[complex.ComplexNumber(6, 3), complex.ComplexNumber(0, 0),complex.ComplexNumber(1, 0)], [complex.ComplexNumber(2, -12), complex.ComplexNumber(5, -2.1),complex.ComplexNumber(2, -5)],[complex.ComplexNumber(0, 19), complex.ComplexNumber(17, 0),complex.ComplexNumber(3, 4.5)]])
         self.assertTrue(mTest.equals(mSol))
     
-    '''
+    
     def testNorm (self):
         m1 = matrix.Matrix([[complex.ComplexNumber(4, 3), complex.ComplexNumber(6,-4),complex.ComplexNumber(12, -7), complex.ComplexNumber(0, 13)]])
         mTest = m1.norm()
-        mSol =  6.855
-        self.assertEquals(mTest, mSol) '''
+        mSol = 20.952
+        self.assertEqual(mTest, mSol)
 
-    
+    def testTensorProduct(self):
+        m1 = matrix.Matrix([[complex.ComplexNumber(3, 0), complex.ComplexNumber(2,0)],[complex.ComplexNumber(-1, 0), complex.ComplexNumber(0, 0)]])
+        m2 = matrix.Matrix([[complex.ComplexNumber(6, 0), complex.ComplexNumber(5,0)],[complex.ComplexNumber(3, 0), complex.ComplexNumber(2, 0)]])
+        mTest = m1.tensorProduct(m2)
+        mSol =  matrix.Matrix([[complex.ComplexNumber(18, 0), complex.ComplexNumber(15, 0),complex.ComplexNumber(12, 0),complex.ComplexNumber(10, 0)],
+        [complex.ComplexNumber(9, 0),complex.ComplexNumber(6, 0),complex.ComplexNumber(6, 0), complex.ComplexNumber(4, 0)],
+        [complex.ComplexNumber(-6, 0),complex.ComplexNumber(-5, 0),complex.ComplexNumber(0, 0),complex.ComplexNumber(0, 0)],
+        [complex.ComplexNumber(-3, 0),complex.ComplexNumber(-2, 0),complex.ComplexNumber(0, 0),complex.ComplexNumber(0, 0),]])
+        self.assertTrue(mTest.equals(mSol))
+        
+    def testLabTensor(self):
+        h = matrix.Matrix([[complex.ComplexNumber(1, 0), complex.ComplexNumber(1, 0)], [complex.ComplexNumber(1, 0), complex.ComplexNumber(-1, 0)]])
+        h = h.scalarMultiplication(complex.ComplexNumber(1/math.sqrt(2),0))
+        x = matrix.Matrix([[complex.ComplexNumber(0, 0), complex.ComplexNumber(1, 0)], [complex.ComplexNumber(1, 0), complex.ComplexNumber(0, 0)]])
+        m1 = h.tensorProduct(h)
+        m2 = h.tensorProduct(x)
+        v = matrix.Matrix([[complex.ComplexNumber(1, 0), complex.ComplexNumber(0, 0),complex.ComplexNumber(0, 0), complex.ComplexNumber(0, 0)]])
+        res = v.multiplication(m1)
+        resultado = res.multiplication(m2)
+        resultado.show()
 
 
 if __name__ == '__main__':

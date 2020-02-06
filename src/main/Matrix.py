@@ -6,14 +6,14 @@ class Matrix:
     def __init__(self, pmatrix):
         self.mtx =pmatrix
         self.m = len(pmatrix) #rows
-        self.n = len(pmatrix) #column
+        self.n = len(pmatrix[0]) #column
 
     def add (self, mat2):
         """ Suma de dos matrices/vectores """
         if (self.m != mat2.m and self.n != mat2.n):
             raise Exception('The dimensions of the matrices are not the same ')
         else:
-            matrixResult = [[complex.ComplexNumber(0,0) for x in range(self.m)] for y in range(self.n)] 
+            matrixResult = [[complex.ComplexNumber(0,0) for x in range(self.n)] for y in range(self.m)] 
             for i in range (self.m):
                 for j in range (self.n):
                     matrixResult[i][j] = self.mtx[i][j].add(mat2.mtx[i][j])
@@ -25,7 +25,7 @@ class Matrix:
         if (self.m != mat2.m and self.n != mat2.n):
             raise Exception('The dimensions of the matrices are not the same ')
         else:
-            matrixResult = [[complex.ComplexNumber(0,0) for x in range(self.m)] for y in range(self.n)] 
+            matrixResult = [[complex.ComplexNumber(0,0) for x in range(self.n)] for y in range(self.m)] 
             for i in range (self.m):
                 for j in range (self.n):
                     matrixResult[i][j] = self.mtx[i][j].subtract(mat2.mtx[i][j])
@@ -34,7 +34,7 @@ class Matrix:
 
     def inverse (self):
         """ Inversa de una matriz/vectore"""
-        matrixResult = [[complex.ComplexNumber(0,0) for x in range(self.m)] for y in range(self.n)] 
+        matrixResult = [[complex.ComplexNumber(0,0) for x in range(self.n)] for y in range(self.m)] 
         for i in range (self.m):
             for j in range (self.n):
                 matrixResult[i][j] = self.mtx[i][j].inverse()
@@ -43,7 +43,8 @@ class Matrix:
     
     def scalarMultiplication(self,c):
         """ Producto escalar de una matrix/vector y un numero complejo c """
-        matrixResult = [[complex.ComplexNumber(0,0) for x in range(self.m)] for y in range(self.n)] 
+        
+        matrixResult = [[complex.ComplexNumber(0,0) for x in range(self.n)] for y in range(self.m)] 
         for i in range (self.m):
             for j in range (self.n):
                 matrixResult[i][j]=self.mtx[i][j].multiplication(c)
@@ -52,10 +53,10 @@ class Matrix:
 
     def multiplication(self, mat2):
         """ multiplicacion de dos matrices """
-        if (self.m != mat2.n ):
+        if (self.n != mat2.m ):
             raise Exception('The dimensions of rows and columns do not match')
         else:
-            matrixResult = [[complex.ComplexNumber(0,0) for x in range(self.m)] for y in range(self.n)] 
+            matrixResult = [[complex.ComplexNumber(0,0) for x in range(mat2.n)] for y in range(self.m)] 
             for i in range (self.m):
                 for j in range (mat2.n):
                     sum = complex.ComplexNumber(0,0)
@@ -67,7 +68,7 @@ class Matrix:
 
     def transpose (self) :
         """ Transpuesta de una matriz"""
-        matrixResult = [[complex.ComplexNumber(0,0) for x in range(self.n)] for y in range(self.m)] 
+        matrixResult = [[complex.ComplexNumber(0,0) for x in range(self.m)] for y in range(self.n)] 
         for i in range (self.m):
             for j in range (self.n):
                 matrixResult[j][i] = self.mtx[i][j]
@@ -76,7 +77,7 @@ class Matrix:
     
     def conjugate (self):
         """ Conjuagada de una matriz"""
-        matrixResult = [[complex.ComplexNumber(0,0) for x in range(self.m)] for y in range(self.n)] 
+        matrixResult = [[complex.ComplexNumber(0,0) for x in range(self.n)] for y in range(self.m)] 
         for i in range (self.m):
             for j in range (self.n):
                 matrixResult[i][j] = self.mtx[i][j].conjugate()
@@ -95,7 +96,7 @@ class Matrix:
             sum = complex.ComplexNumber(0,0)
             for i in range (self.m):
                 sum = sum.add(self.mtx[i][i])
-            print(sum.partReal)
+            #print(sum.partReal)
             return sum.partReal
 
     def innerProduct(self,mat2):
@@ -112,7 +113,7 @@ class Matrix:
     
     def tensorProduct(self,mat2):
         "producto tensor"
-        matrixResult = [[complex.ComplexNumber(0,0) for x in range(self.m*mat2.m)] for y in range(self.n*mat2.n)] 
+        matrixResult = [[complex.ComplexNumber(0,0) for x in range(self.n*mat2.n)] for y in range(self.m*mat2.m)] 
         for i in range (self.m):
             for j in range (self.n):
                 matriz = mat2.scalarMultiplication(self.mtx[i][j])
@@ -147,10 +148,10 @@ class Matrix:
                     result = False
         return result
 
-    def showMatrix(self):
-        for i in range(self.m):
-            for j in range(self.n):
-                print(self.mtx[i][j].partReal,self.mtx[i][j].partImag)
-            print("-----")
-
-   
+    def show(self):
+        for i in range(self.n):
+            strRow=""
+            for j in range(self.m):
+                strRow = strRow + " " +self.mtx[j][i].showNumber()
+                #print(self.mtx[i][j].showNumber()+"numero")
+            print(strRow)
