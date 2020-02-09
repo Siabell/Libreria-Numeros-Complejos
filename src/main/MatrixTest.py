@@ -12,6 +12,20 @@ class ComplexNumberTest(unittest.TestCase):
         mSol =  matrix.Matrix([[complex.ComplexNumber(0, -1), complex.ComplexNumber(6, 4)], [complex.ComplexNumber(4, 8), complex.ComplexNumber(-1, 3)]])
         self.assertTrue(mTest.equals(mSol))
 
+    def testShouldAddTwoComplexVectors(self):
+        m1 = matrix.Matrix([[complex.ComplexNumber(2, 5), complex.ComplexNumber(1, 1),complex.ComplexNumber(4, 3)]])
+        m2 = matrix.Matrix([[complex.ComplexNumber(5, 13), complex.ComplexNumber(6, 2),complex.ComplexNumber(0.53, -6), complex.ComplexNumber(12, 0)]])
+        m3 = matrix.Matrix([[complex.ComplexNumber(7, -8), complex.ComplexNumber(0, 4),complex.ComplexNumber(2, 0), complex.ComplexNumber(9.4, 3)]])   
+        vectorSDifferentLength = False
+        try:
+            mTest1 = m1.add(m2)
+        except:
+            vectorSDifferentLength = True
+        mTest2 = m2.add(m3)
+        mSol =  matrix.Matrix([[complex.ComplexNumber(12, 5), complex.ComplexNumber(6, 6),complex.ComplexNumber(2.53, -6), complex.ComplexNumber(21.4, 3)]])
+        self.assertTrue(vectorSDifferentLength)
+        self.assertTrue(mTest2.equals(mSol))
+
     def testShouldSubtractTwoMatrices(self):
         m1 = matrix.Matrix([[complex.ComplexNumber(-1, -1), complex.ComplexNumber(3, 0)], [complex.ComplexNumber(4, 6), complex.ComplexNumber(2, 2)]])
         m2 = matrix.Matrix([[complex.ComplexNumber(1, 0), complex.ComplexNumber(3, 4)], [complex.ComplexNumber(0, 2), complex.ComplexNumber(-3, 1)]])
@@ -52,6 +66,25 @@ class ComplexNumberTest(unittest.TestCase):
         mTest = m1.norm()
         mSol = 20.952
         self.assertEqual(mTest, mSol)
+
+    def testDistance(self):
+        m1 = matrix.Matrix([[complex.ComplexNumber(3, 0),complex.ComplexNumber(1,0),complex.ComplexNumber(2, 0)]])
+        m2 = matrix.Matrix([[complex.ComplexNumber(2, 0),complex.ComplexNumber(2,0),complex.ComplexNumber(-1, 0)]])
+        mTest = m1.distance(m2)
+        mSol = round(math.sqrt(11),3)
+        self.assertEqual(mTest, mSol)
+    '''
+    def testIsUnitary(self):
+        m1 = matrix.Matrix([[complex.ComplexNumber(1/2, 1/2), complex.ComplexNumber(0, 1/math.sqrt(3)),complex.ComplexNumber(3/(2*math.sqrt(15)),1/(2*math.sqrt(15)))], [complex.ComplexNumber(-1/2, 0), complex.ComplexNumber(1/math.sqrt(3), 0),complex.ComplexNumber(4/(2*math.sqrt(15)), 3/(2*math.sqrt(15)))],[complex.ComplexNumber(1/2, 0), complex.ComplexNumber(0, -1/math.sqrt(3)),complex.ComplexNumber(0, 5/(2*math.sqrt(15)))]])
+        mTest = m1.isUnitary()
+        mSol = True
+        self.assertTrue(mTest == mSol)'''
+
+    def testIsHermitian(self):
+        m1 = matrix.Matrix([[complex.ComplexNumber(7, 0),complex.ComplexNumber(6,5)],[complex.ComplexNumber(6, -5),complex.ComplexNumber(-3, 0)]])
+        mTest = m1.isHermitian()
+        mSol = True
+        self.assertTrue(mTest == mSol)
 
     def testTensorProduct(self):
         m1 = matrix.Matrix([[complex.ComplexNumber(3, 0), complex.ComplexNumber(2,0)],[complex.ComplexNumber(-1, 0), complex.ComplexNumber(0, 0)]])

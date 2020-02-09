@@ -2,8 +2,8 @@ import math
 
 class ComplexNumber:
     def __init__(self, real, imag):
-        self.partReal=real
-        self.partImag=imag
+        self.partReal=round(real,3)
+        self.partImag=round(imag,3)
 
     def add(nComplex1,nComplex2):
         """ sumar dos numeros complejos """
@@ -25,7 +25,7 @@ class ComplexNumber:
 
     def division(nComplex1,nComplex2):
         """ dividir dos numeros complejos """
-        real=(nComplex1.partReal*nComplex2.partReal)+(nComplex1.partImag*nComplex2.partImag)
+        real=((nComplex1.partReal)*(nComplex2.partReal))+((nComplex1.partImag)*(nComplex2.partImag))
         debajo=(pow(nComplex2.partReal,2)+pow(nComplex2.partImag,2))
         imag=(nComplex1.partReal*nComplex2.partImag)-(nComplex1.partImag*nComplex2.partReal)
         partereal= real/debajo
@@ -34,7 +34,7 @@ class ComplexNumber:
 
     def modulus(nComplex):
         """ modulo de un numero complejo """
-        return math.sqrt(pow(nComplex.partReal,2)+pow(nComplex.partImag,2))
+        return round(math.sqrt(pow(nComplex.partReal,2)+pow(nComplex.partImag,2)),3)
 
     def conjugate(nComplex):
         """ conjugada de un numero complejo """
@@ -44,11 +44,11 @@ class ComplexNumber:
         """ de cartesiana a polar de un numero complejo """
         p = math.sqrt(pow(nComplex.partReal,2)+pow(nComplex.partImag,2))
         o = math.atan(nComplex.partReal/nComplex.partImag)
-        return (p,o)
+        return (round(p,3),round(o,3))
 
     def phase(nComplex):
         """ phase de un numeros complejo """
-        return math.atan(nComplex.partReal/nComplex.partImag)
+        return round(math.atan(nComplex.partReal/nComplex.partImag),3)
 
     def inverse(nComplex):
         """ inversa de un numeros complejo """
@@ -56,6 +56,6 @@ class ComplexNumber:
         nComplex.partImag = nComplex.partImag*-1
 
     def showNumber(num):
-        strNum = "[ "+str(num.partReal)+" "+str(num.partImag)+"i ]"
+        strNum = "( "+str(num.partReal)+" "+str(num.partImag)+"i )"
         return strNum
 

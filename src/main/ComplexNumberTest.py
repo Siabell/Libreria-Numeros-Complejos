@@ -28,6 +28,7 @@ class ComplexNumberTest(unittest.TestCase):
         c1 = complex.ComplexNumber(4, 5)
         c2 = complex.ComplexNumber(2,6)
         cResultTest = c1.division(c2)
+        cResultTest.showNumber()
         self.assertAlmostEqual(cResultTest.partReal,0.95)
         self.assertAlmostEqual(cResultTest.partImag,0.35)
 
@@ -44,13 +45,13 @@ class ComplexNumberTest(unittest.TestCase):
     def testShouldGetPhaseOfComplexNumber(self):
         c1 = complex.ComplexNumber(1, 1)
         cResultTest = c1.phase()
-        self.assertAlmostEqual(cResultTest,0.78539816339)
+        self.assertAlmostEqual(cResultTest,0.785)
 
     def testShouldGetPolarRepresentationOfComplexNumber(self):
         c1 = complex.ComplexNumber(1, 1)
         cResultTest = c1.cartesianToPolar()
-        self.assertAlmostEqual(cResultTest[0],1.41421356237)
-        self.assertAlmostEqual(cResultTest[1],0.7853981633)
+        self.assertAlmostEqual(cResultTest[0],1.414)
+        self.assertAlmostEqual(cResultTest[1],0.785)
 
 if __name__ == '__main__':
     unittest.main()

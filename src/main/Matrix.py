@@ -10,8 +10,8 @@ class Matrix:
 
     def add (self, mat2):
         """ Suma de dos matrices/vectores """
-        if (self.m != mat2.m and self.n != mat2.n):
-            raise Exception('The dimensions of the matrices are not the same ')
+        if (self.m != mat2.m or self.n != mat2.n):
+            raise Exception('The dimensions of the matrices/vectors are not the same ')
         else:
             matrixResult = [[complex.ComplexNumber(0,0) for x in range(self.n)] for y in range(self.m)] 
             for i in range (self.m):
@@ -67,7 +67,7 @@ class Matrix:
             return matResult
 
     def transpose (self) :
-        """ Transpuesta de una matriz"""
+        """ Transpuesta de una matriz/vector"""
         matrixResult = [[complex.ComplexNumber(0,0) for x in range(self.m)] for y in range(self.n)] 
         for i in range (self.m):
             for j in range (self.n):
@@ -76,7 +76,7 @@ class Matrix:
         return matResult
     
     def conjugate (self):
-        """ Conjuagada de una matriz"""
+        """ Conjuagada de una matriz/vector"""
         matrixResult = [[complex.ComplexNumber(0,0) for x in range(self.n)] for y in range(self.m)] 
         for i in range (self.m):
             for j in range (self.n):
@@ -101,7 +101,7 @@ class Matrix:
 
     def innerProduct(self,mat2):
         """ Producto interno de una matriz: la traza del resultado de 
-            la multiplicacion de las mattriz adjunta y la segunda matriz"""
+            la multiplicacion de las matriz adjunta y la segunda matriz"""
         adjunta = self.adjoint()
         matResult = adjunta.multiplication(mat2)
         return matResult.trace()
@@ -111,6 +111,32 @@ class Matrix:
         result = math.sqrt(self.innerProduct(self))
         return round(result,3)
     
+    def distance(self,mat2):
+        """ distance """ 
+        reduc=self.subtract(mat2)
+        return reduc.norm()
+
+    def isHermitian(self):
+        transpuesta = self.transpose()
+        conjugada = self.conjugate()
+        hermitian = False
+        if transpuesta.equals(conjugada):
+            hermitian = True
+        return hermitian
+
+    def isUnitary(self):
+        adjunta = self.adjoint()
+        mUnitaria = self.multiplication(adjunta)
+        unitary = True
+        for i in range (self.m):
+            for j in range (self.n):
+                if (i == j and mUnitaria.mtx[i][j]!=1) :
+                    unitary = False
+                elif (i != j and mUnitaria.mtx[i][j]!=0 ):
+                    unitary = False
+        #mUnitaria.show()
+        return unitary
+
     def tensorProduct(self,mat2):
         "producto tensor"
         matrixResult = [[complex.ComplexNumber(0,0) for x in range(self.n*mat2.n)] for y in range(self.m*mat2.m)] 
