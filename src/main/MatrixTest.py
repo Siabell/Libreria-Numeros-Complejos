@@ -2,7 +2,8 @@ import unittest
 import ComplexNumber as complex
 import Matrix as matrix
 import math
-
+import sympy 
+from sympy import *
 class ComplexNumberTest(unittest.TestCase):
 
     def testShouldAddTwoComplexVectors(self):
@@ -182,8 +183,24 @@ class ComplexNumberTest(unittest.TestCase):
         v = matrix.Matrix([[complex.ComplexNumber(1, 0), complex.ComplexNumber(0, 0),complex.ComplexNumber(0, 0), complex.ComplexNumber(0, 0)]])
         res = v.multiplication(m1)
         resultado = res.multiplication(m2)
-        resultado.show()
+        #resultado.show()
 
+    def testeigenValues(self):
+        print("holaa")
+        self.assertTrue(True)
+        mSol =  matrix.Matrix([[complex.ComplexNumber(1, 0), complex.ComplexNumber(-3, 0),complex.ComplexNumber(3, 0)], [complex.ComplexNumber(3, 0), complex.ComplexNumber(-5,0),complex.ComplexNumber(3, 0)],[complex.ComplexNumber(6, 0), complex.ComplexNumber(-6, 0),complex.ComplexNumber(4, 0)]])
+        listValues = mSol.eigenValues()
+        listSolutio = [complex.ComplexNumber(4, 0), complex.ComplexNumber(-2, 0),complex.ComplexNumber(-2, 0)]
+        result = True
+        if (len(listValues)!= len(listSolutio)):
+            raise Exception('The dimensions of the lists are not the same ')
+        for i in range(len(listValues)):
+            if(listValues[i].partReal != listSolutio[i].partReal or listValues[i].partImag != listSolutio[i].partImag):
+                result = False
+        A = Matrix([[1, -3,3], [3, -5,3],[6,-6,4]])
+        print(A.eigenVector()) 
+        self.assertTrue(result)
+        
 
 if __name__ == '__main__':
     unittest.main()

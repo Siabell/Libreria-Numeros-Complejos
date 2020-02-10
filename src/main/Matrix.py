@@ -1,6 +1,8 @@
 import math
 import sys
 import ComplexNumber as complex
+import sympy 
+from sympy import *
 
 class Matrix:
     def __init__(self, pmatrix):
@@ -162,6 +164,33 @@ class Matrix:
             realI=realI+1
         return matrixResult
     
+    def eigenValues(self):
+        SympyMatrix = [[complex.ComplexNumber(0,0) for x in range(self.n)] for y in range(self.m)] 
+        for i in range (self.m):
+            for k in range (self.n):
+                SympyMatrix[i][k] = ((self.mtx[i][k].partReal)+(self.mtx[i][k].partImag*1j))
+        matResult = sympy.Matrix(SympyMatrix)
+        values = matResult.eigenvals()
+        resultValues = []
+        for key,value in values.items():
+            for nRepetidos in range(value):
+                #print(key)
+                resultValues.append(complex.ComplexNumber(sympy.re(key),sympy.im(key)))
+        return resultValues
+
+    def eigenVectors(self):
+        SympyMatrix = [[complex.ComplexNumber(0,0) for x in range(self.n)] for y in range(self.m)] 
+        for i in range (self.m):
+            for k in range (self.n):
+                SympyMatrix[i][k] = ((self.mtx[i][k].partReal)+(self.mtx[i][k].partImag*1j))
+        matResult = sympy.Matrix(SympyMatrix)
+        values = matResult.eigenvects()
+        resultValues = []
+        for key,value in values.items():
+            for nRepetidos in range(value):
+                #print(key)
+                resultValues.append(complex.ComplexNumber(sympy.re(key),sympy.im(key)))
+        return resultValues
 
     def equals(self,mat2):
         """ Compara si los elementos de las matrices son iguales """
@@ -174,6 +203,15 @@ class Matrix:
                     result = False
         return result
 
+    def equalsList(self,list2):
+        result = True
+        if (self.length!= list2.length):
+            raise Exception('The dimensions of the lists are not the same ')
+        for i in range(self.length):
+            if(self[i].partReal != list2[i][j].partReal or self[i].partImag != list2[i].partImag):
+                result = False
+        return result
+
     def show(self):
         for i in range(self.n):
             strRow=""
@@ -181,3 +219,5 @@ class Matrix:
                 strRow = strRow + " " +self.mtx[j][i].showNumber()
                 #print(self.mtx[i][j].showNumber()+"numero")
             print(strRow)
+
+
