@@ -139,24 +139,31 @@ class ComplexNumberTest(unittest.TestCase):
         mSol = 5
         self.assertEqual(mSol,mTest)
     
-    def testNorm (self):
+    def testActionOfaMatrixAndVector(self):
+        m1 = matrix.Matrix([[complex.ComplexNumber(1, 0), complex.ComplexNumber(0, 0),complex.ComplexNumber(1, 0)],[ complex.ComplexNumber(0, 0), complex.ComplexNumber(1, 0), complex.ComplexNumber(0, 0)],[ complex.ComplexNumber(1, 0), complex.ComplexNumber(0, 0), complex.ComplexNumber(1, 0)]])
+        m2 = matrix.Matrix([[complex.ComplexNumber(1, 0), complex.ComplexNumber(0, 0),complex.ComplexNumber(1, 0)]])
+        mTest = m2.action(m1)
+        mSol = matrix.Matrix([[complex.ComplexNumber(2, 0), complex.ComplexNumber(0, 0),complex.ComplexNumber(2, 0)]])
+        self.assertTrue(mTest.equals(mSol))
+    
+    def testGetTheNorm (self):
         m1 = matrix.Matrix([[complex.ComplexNumber(4, 3), complex.ComplexNumber(6,-4),complex.ComplexNumber(12, -7), complex.ComplexNumber(0, 13)]])
         mTest = m1.norm()
         mSol = 20.952
         self.assertEqual(mTest, mSol)
 
-    def testDistance(self):
+    def testShouldGetTheDistance(self):
         m1 = matrix.Matrix([[complex.ComplexNumber(3, 0),complex.ComplexNumber(1,0),complex.ComplexNumber(2, 0)]])
         m2 = matrix.Matrix([[complex.ComplexNumber(2, 0),complex.ComplexNumber(2,0),complex.ComplexNumber(-1, 0)]])
         mTest = m1.distance(m2)
         mSol = round(math.sqrt(11),3)
         self.assertEqual(mTest, mSol)
-    '''
+    
     def testIsUnitary(self):
-        m1 = matrix.Matrix([[complex.ComplexNumber(1/2, 1/2), complex.ComplexNumber(0, 1/math.sqrt(3)),complex.ComplexNumber(3/(2*math.sqrt(15)),1/(2*math.sqrt(15)))], [complex.ComplexNumber(-1/2, 0), complex.ComplexNumber(1/math.sqrt(3), 0),complex.ComplexNumber(4/(2*math.sqrt(15)), 3/(2*math.sqrt(15)))],[complex.ComplexNumber(1/2, 0), complex.ComplexNumber(0, -1/math.sqrt(3)),complex.ComplexNumber(0, 5/(2*math.sqrt(15)))]])
+        m1 = matrix.Matrix([[complex.ComplexNumber(0.5, 0.5), complex.ComplexNumber(0.5, -0.5)], [complex.ComplexNumber(0.5, -0.5), complex.ComplexNumber(0.5, 0.5)]])
         mTest = m1.isUnitary()
         mSol = True
-        self.assertTrue(mTest == mSol)'''
+        self.assertTrue(mTest == mSol)
 
     def testShoulIsHermitian(self):
         m1 = matrix.Matrix([[complex.ComplexNumber(7, 0),complex.ComplexNumber(6,5)],[complex.ComplexNumber(6, -5),complex.ComplexNumber(-3, 0)]])
@@ -164,7 +171,7 @@ class ComplexNumberTest(unittest.TestCase):
         mSol = True
         self.assertTrue(mTest == mSol)
 
-    def testTensorProduct(self):
+    def testShouldGetTensorProduct(self):
         m1 = matrix.Matrix([[complex.ComplexNumber(3, 0), complex.ComplexNumber(2,0)],[complex.ComplexNumber(-1, 0), complex.ComplexNumber(0, 0)]])
         m2 = matrix.Matrix([[complex.ComplexNumber(6, 0), complex.ComplexNumber(5,0)],[complex.ComplexNumber(3, 0), complex.ComplexNumber(2, 0)]])
         mTest = m1.tensorProduct(m2)
@@ -185,7 +192,7 @@ class ComplexNumberTest(unittest.TestCase):
         resultado = res.multiplication(m2)
         #resultado.show()
 
-    def testeigenValues(self):
+    def testShouldGeteigenValues(self):
         print("holaa")
         self.assertTrue(True)
         mSol =  matrix.Matrix([[complex.ComplexNumber(1, 0), complex.ComplexNumber(-3, 0),complex.ComplexNumber(3, 0)], [complex.ComplexNumber(3, 0), complex.ComplexNumber(-5,0),complex.ComplexNumber(3, 0)],[complex.ComplexNumber(6, 0), complex.ComplexNumber(-6, 0),complex.ComplexNumber(4, 0)]])

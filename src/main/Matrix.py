@@ -68,6 +68,21 @@ class Matrix:
             matResult = Matrix(matrixResult)
             return matResult
 
+    def action(self, mat2):
+        """ accion de una matriz sobre un vector (primero vector, luego matriz) """
+        if (self.n != mat2.m ):
+            raise Exception('The dimensions of rows and columns do not match')
+        else:
+            matrixResult = [[complex.ComplexNumber(0,0) for x in range(mat2.n)] for y in range(self.m)] 
+            for i in range (self.m):
+                for j in range (mat2.n):
+                    sum = complex.ComplexNumber(0,0)
+                    for z in range(self.n):
+                        sum = sum.add(self.mtx[i][z].multiplication(mat2.mtx[z][j]))
+                    matrixResult[i][j] = sum
+            matResult = Matrix(matrixResult)
+            return matResult
+
     def transpose (self) :
         """ Transpuesta de una matriz/vector"""
         matrixResult = [[complex.ComplexNumber(0,0) for x in range(self.m)] for y in range(self.n)] 
@@ -114,11 +129,12 @@ class Matrix:
         return round(result,3)
     
     def distance(self,mat2):
-        """ distance """ 
+        """ distance de vectores""" 
         reduc=self.subtract(mat2)
         return reduc.norm()
 
     def isHermitian(self):
+        """ verifica si una matriz es hermitian""" 
         transpuesta = self.transpose()
         conjugada = self.conjugate()
         hermitian = False
@@ -127,6 +143,7 @@ class Matrix:
         return hermitian
 
     def isUnitary(self):
+        """ verifica si una matriz es unitaria""" 
         adjunta = self.adjoint()
         mUnitaria = self.multiplication(adjunta)
         unitary = True
@@ -165,26 +182,13 @@ class Matrix:
         return matrixResult
     
     def eigenValues(self):
+        """ retorna los vectores propios de una matriz""" 
         SympyMatrix = [[complex.ComplexNumber(0,0) for x in range(self.n)] for y in range(self.m)] 
         for i in range (self.m):
             for k in range (self.n):
                 SympyMatrix[i][k] = ((self.mtx[i][k].partReal)+(self.mtx[i][k].partImag*1j))
         matResult = sympy.Matrix(SympyMatrix)
         values = matResult.eigenvals()
-        resultValues = []
-        for key,value in values.items():
-            for nRepetidos in range(value):
-                #print(key)
-                resultValues.append(complex.ComplexNumber(sympy.re(key),sympy.im(key)))
-        return resultValues
-
-    def eigenVectors(self):
-        SympyMatrix = [[complex.ComplexNumber(0,0) for x in range(self.n)] for y in range(self.m)] 
-        for i in range (self.m):
-            for k in range (self.n):
-                SympyMatrix[i][k] = ((self.mtx[i][k].partReal)+(self.mtx[i][k].partImag*1j))
-        matResult = sympy.Matrix(SympyMatrix)
-        values = matResult.eigenvects()
         resultValues = []
         for key,value in values.items():
             for nRepetidos in range(value):
