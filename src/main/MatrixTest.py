@@ -197,9 +197,6 @@ class ComplexNumberTest(unittest.TestCase):
         for i in range(len(listValues)):
             if(listValues[i].partReal != listSolutio[i].partReal or listValues[i].partImag != listSolutio[i].partImag):
                 result = False
-        A = Matrix([[1, -3,3], [3, -5,3],[6,-6,4]])
-        print(A.eigenVector()) 
-        self.assertTrue(result)
         
 
 if __name__ == '__main__':
