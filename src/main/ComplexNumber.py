@@ -52,8 +52,9 @@ class ComplexNumber:
 
     def inverse(nComplex):
         """ inversa de un numeros complejo """
-        nComplex.partReal = nComplex.partReal*-1
-        nComplex.partImag = nComplex.partImag*-1
+        parteReal = nComplex.partReal*-1
+        parteImag = nComplex.partImag*-1
+        return ComplexNumber(parteReal,parteImag)
 
     def showNumber(num):
         strNum = "( "+str(num.partReal)+" "+str(num.partImag)+"i )"

@@ -22,7 +22,7 @@ class Matrix:
 
     def subtract (self, mat2):
         """ Resta de dos matrices/vectores """
-        if (self.m != mat2.m and self.n != mat2.n):
+        if (self.m != mat2.m or self.n != mat2.n):
             raise Exception('The dimensions of the matrices are not the same ')
         else:
             matrixResult = [[complex.ComplexNumber(0,0) for x in range(self.n)] for y in range(self.m)] 
@@ -130,9 +130,9 @@ class Matrix:
         unitary = True
         for i in range (self.m):
             for j in range (self.n):
-                if (i == j and mUnitaria.mtx[i][j]!=1) :
+                if (i == j and (mUnitaria.mtx[i][j].partReal!=1 or mUnitaria.mtx[i][j].partImag!=0)) :
                     unitary = False
-                elif (i != j and mUnitaria.mtx[i][j]!=0 ):
+                elif (i != j and (mUnitaria.mtx[i][j].partReal!=0 or mUnitaria.mtx[i][j].partImag!=0)):
                     unitary = False
         #mUnitaria.show()
         return unitary
