@@ -217,11 +217,23 @@ class Matrix:
         return result
 
     def show(self):
-        for i in range(self.n):
+        for i in range(self.m):
             strRow=""
-            for j in range(self.m):
-                strRow = strRow + " " +self.mtx[j][i].showNumber()
+            for j in range(self.n):
+                strRow = strRow + " " +self.mtx[i][j].showNumber()
                 #print(self.mtx[i][j].showNumber()+"numero")
             print(strRow)
 
 
+    def determinante (self, x, num):
+        mat = self
+        mat.show()
+        print("------------------")
+        for i in range(num):
+            
+            temp = self.multiplication(mat)
+            #temp.show()
+            mat = temp
+        mat.show()
+        print("hola yo")
+        return x.multiplication(mat)

@@ -193,7 +193,6 @@ class ComplexNumberTest(unittest.TestCase):
         #resultado.show()
 
     def testShouldGeteigenValues(self):
-        print("holaa")
         self.assertTrue(True)
         mSol =  matrix.Matrix([[complex.ComplexNumber(1, 0), complex.ComplexNumber(-3, 0),complex.ComplexNumber(3, 0)], [complex.ComplexNumber(3, 0), complex.ComplexNumber(-5,0),complex.ComplexNumber(3, 0)],[complex.ComplexNumber(6, 0), complex.ComplexNumber(-6, 0),complex.ComplexNumber(4, 0)]])
         listValues = mSol.eigenValues()
@@ -204,7 +203,7 @@ class ComplexNumberTest(unittest.TestCase):
         for i in range(len(listValues)):
             if(listValues[i].partReal != listSolutio[i].partReal or listValues[i].partImag != listSolutio[i].partImag):
                 result = False
-        
+
 
 if __name__ == '__main__':
     unittest.main()

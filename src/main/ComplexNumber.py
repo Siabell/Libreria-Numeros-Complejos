@@ -43,12 +43,12 @@ class ComplexNumber:
     def cartesianToPolar(nComplex):
         """ de cartesiana a polar de un numero complejo """
         p = math.sqrt(pow(nComplex.partReal,2)+pow(nComplex.partImag,2))
-        o = math.atan(nComplex.partReal/nComplex.partImag)
+        o = math.atan2(nComplex.partReal,nComplex.partImag,)
         return (round(p,3),round(o,3))
 
     def phase(nComplex):
         """ phase de un numeros complejo """
-        return round(math.atan(nComplex.partReal/nComplex.partImag),3)
+        return round(math.atan2(nComplex.partReal,nComplex.partImag),3)
 
     def inverse(nComplex):
         """ inversa de un numeros complejo """
