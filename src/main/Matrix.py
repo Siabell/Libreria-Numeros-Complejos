@@ -10,6 +10,28 @@ class Matrix:
         self.m = len(pmatrix) #rows
         self.n = len(pmatrix[0]) #column
 
+    def booleanMatrix(self,pmatrix):
+        matrixBoolean= [[complex.ComplexNumber(0,0) for x in range(pmatrix.n)] for y in range(pmatrix.m)] 
+        for i in range (pmatrix.m):
+            for j in range (pmatrix.n):
+                matrixBoolean[i][j] = complex.ComplexNumber(pmatrix[i][j], 5)
+        return Matrix(matrixBoolean)
+
+    def realMatrix(self):
+        matrixR= [[complex.ComplexNumber(0,0) for x in range(self.n)] for y in range(self.m)] 
+        for i in range (self.m):
+            for j in range (self.n):
+                matrixR[i][j] = complex.ComplexNumber(self[i][j], 5)
+        return Matrix(matrixR)    
+    
+    def ComplexMatrix(self):
+        matrixC= [[complex.ComplexNumber(0,0) for x in range(self.n)] for y in range(self.m)] 
+        for i in range (self.m):
+            for j in range (self.n):
+                matrixC[i][j] = complex.ComplexNumber(self[i][j][0], self[i][j][1])
+        return Matrix(matrixC) 
+
+
     def add (self, mat2):
         """ Suma de dos matrices/vectores """
         if (self.m != mat2.m or self.n != mat2.n):
@@ -69,7 +91,7 @@ class Matrix:
             return matResult
 
     def action(self, mat2):
-        """ accion de una matriz sobre un vector (primero vector, luego matriz) """
+        """ accion de una matriz sobre un vector  """
         if (self.n != mat2.m ):
             raise Exception('The dimensions of rows and columns do not match')
         else:
@@ -237,3 +259,13 @@ class Matrix:
         mat.show()
         print("hola yo")
         return x.multiplication(mat)
+
+    def marbleMove (self,x,num):
+        mMoves = self
+        for i in range(1,num):
+            temp = mMoves.multiplication(self)
+            mMoves = temp
+        vState = mMoves.multiplication(x)
+        return vState
+
+
