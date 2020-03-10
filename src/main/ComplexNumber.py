@@ -60,3 +60,6 @@ class ComplexNumber:
         strNum = "( "+str(num.partReal)+" "+str(num.partImag)+"i )"
         return strNum
 
+    def getParteReal(self):
+        self.partReal
+

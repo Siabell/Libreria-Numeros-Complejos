@@ -6,6 +6,7 @@ import sympy
 from sympy import *
 import matplotlib.pyplot as plt
 import numpy as np
+import QuantumMath as qm 
 
 class classicToQuantumTest(unittest.TestCase):
 
@@ -73,7 +74,34 @@ class classicToQuantumTest(unittest.TestCase):
         p2 = s2.probability()
         # grafica de las probabilidades
         vPosition = [0,1,2,3.5,4,5.8,6,7]
-        matrix.plot_bar(vPosition,p2 ,"probability","Position","Position probability double Slit")
+        #matrix.plot_bar(vPosition,p2 ,"probability","Position","Position probability double Slit")
+
+    def testPShouldGetPositionOfParticle(self):
+        ket = matrix.complexMatrix([[(-3,-1)],[(0,-2)],[(0,1)],[(2,0)]])
+        probPart=qm.particleProbability(ket,2)
+        self.assertAlmostEqual(probPart,0.0526)
+
+        ket = matrix.complexMatrix([[(2,1)],[(-1,2)],[(0,1)],[(1,0)],[(3,-1)],[(2,0)],[(0,-2)],[(-2,1)],[(1,-3)],[(0,-1)]])
+        probPart=qm.particleProbability(ket,7)
+        self.assertAlmostEqual(probPart,0.1087)
+        
+
+    def testShouldCalculateAmplitude(self):
+        ket = matrix.complexMatrix([[(-3,-1)],[(0,-2)],[(0,1)],[(2,0)]])
+        ket2 = matrix.complexMatrix([[(-1,-4)],[(2,-3)],[(-7,6)],[(-1,1)],[(-5,-3)],[(5,0)],[(5,8)],[(4,-4)],[(8,-7)],[(2,-7)]])
+        braket = qm.transitionAmplitude(ket,ket2)
+        print(braket)
+        
+        '''
+        ket3 = matrix.complexMatrix([[(1/math.sqrt(2),0)],[(0,1/math.sqrt(2))]])
+        omega =  matrix.complexMatrix([[(2,0),(1,1)],[(1,-1),(3,0)]])
+        omegaKet = omega.action(ket3)
+        esd = ket3.innerProduct(omegaKet)
+        esd.showNumber()
+        print('braket')
+        '''
+
+
 
 
 if __name__ == '__main__':

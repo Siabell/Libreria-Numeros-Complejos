@@ -114,20 +114,27 @@ class Matrix:
         else:
             sum = complex.ComplexNumber(0,0)
             for i in range (self.m):
+                self.mtx[i][i].showNumber()
                 sum = sum.add(self.mtx[i][i])
-            #print(sum.partReal)
-            return sum.partReal
+                sum.showNumber()
+            print(sum.partReal)
+            print(sum.partImag)
+            resp = complex.ComplexNumber(sum.partReal,sum.partImag)
+            resp.showNumber()
+            return resp
 
     def innerProduct(self,mat2):
         """ Producto interno de una matriz: la traza del resultado de 
             la multiplicacion de las matriz adjunta y la segunda matriz"""
         adjunta = self.adjoint()
         matResult = adjunta.multiplication(mat2)
-        return matResult.trace()
+        resp = matResult.trace()
+        resp.showNumber()
+        return resp
 
     def norm(self):
         """ norma de una matriz: raiz del producto interno de la misma matriz """
-        result = math.sqrt(self.innerProduct(self))
+        result = math.sqrt(self.innerProduct(self).partReal)
         return round(result,3)
     
     def distance(self,mat2):
@@ -263,6 +270,15 @@ def booleanMatrix(pmatrix):
         for j in range (n):
             matrixBoolean[i][j] = complex.ComplexNumber(pmatrix[i][j], 0)
     return Matrix(matrixBoolean)
+
+def getColumns(self):
+    return self.n
+
+def getRows(self):
+    return self.m
+
+def getMtx(self):
+    return self.mtx
 
 def realMatrix(self):
     """ Crea una matriz con entradas de numeros reales y retorna la 
