@@ -116,11 +116,7 @@ class Matrix:
             for i in range (self.m):
                 self.mtx[i][i].showNumber()
                 sum = sum.add(self.mtx[i][i])
-                sum.showNumber()
-            print(sum.partReal)
-            print(sum.partImag)
             resp = complex.ComplexNumber(sum.partReal,sum.partImag)
-            resp.showNumber()
             return resp
 
     def innerProduct(self,mat2):
@@ -129,7 +125,6 @@ class Matrix:
         adjunta = self.adjoint()
         matResult = adjunta.multiplication(mat2)
         resp = matResult.trace()
-        resp.showNumber()
         return resp
 
     def norm(self):

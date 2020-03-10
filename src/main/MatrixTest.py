@@ -128,9 +128,8 @@ class ComplexNumberTest(unittest.TestCase):
         m1 = matrix.Matrix([[complex.ComplexNumber(8, 0), complex.ComplexNumber(3,0),complex.ComplexNumber(7, 0)]])
         m2 = matrix.Matrix([[complex.ComplexNumber(0, 0), complex.ComplexNumber(-1,0),complex.ComplexNumber(2, 0)]])
         mTest = m1.innerProduct(m2)
-        temo = mTest.getParteReal()
         mSol = 11
-        self.assertEqual(mSol,temo)
+        self.assertEqual(mSol, mTest.partReal)
 
     def testShouldGetTheInnerProductoOfTwoMatrices(self):
         m1 = matrix.Matrix([[complex.ComplexNumber(1, 0), complex.ComplexNumber(1, 0)], [complex.ComplexNumber(-1, 0), complex.ComplexNumber(1, 0)]])
@@ -138,7 +137,7 @@ class ComplexNumberTest(unittest.TestCase):
         mTest = m1.innerProduct(m2)
 
         mSol = 5
-        self.assertEqual(mSol,mTest)
+        self.assertEqual(mSol,mTest.partReal)
     
     def testActionOfaMatrixAndVector(self):
         m1 = matrix.Matrix([[complex.ComplexNumber(1, 0), complex.ComplexNumber(0, 0),complex.ComplexNumber(1, 0)],[ complex.ComplexNumber(0, 0), complex.ComplexNumber(1, 0), complex.ComplexNumber(0, 0)],[ complex.ComplexNumber(1, 0), complex.ComplexNumber(0, 0), complex.ComplexNumber(1, 0)]])

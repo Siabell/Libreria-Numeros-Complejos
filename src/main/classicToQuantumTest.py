@@ -87,22 +87,22 @@ class classicToQuantumTest(unittest.TestCase):
         
 
     def testShouldCalculateAmplitude(self):
-        ket = matrix.complexMatrix([[(-3,-1)],[(0,-2)],[(0,1)],[(2,0)]])
+        
+        ket = matrix.complexMatrix([[(2,1)],[(-1,2)],[(0,1)],[(1,0)],[(3,-1)],[(2,0)],[(0,-2)],[(-2,1)],[(1,-3)],[(0,-1)]])
         ket2 = matrix.complexMatrix([[(-1,-4)],[(2,-3)],[(-7,6)],[(-1,1)],[(-5,-3)],[(5,0)],[(5,8)],[(4,-4)],[(8,-7)],[(2,-7)]])
         braket = qm.transitionAmplitude(ket,ket2)
-        print(braket)
+        mSol = complex.ComplexNumber(-0.022,-0.131)
+        self.assertAlmostEqual(braket.partReal,mSol.partReal)
+        self.assertAlmostEqual(braket.partImag,mSol.partImag)
         
-        '''
+    def testExpectedValue(self):
         ket3 = matrix.complexMatrix([[(1/math.sqrt(2),0)],[(0,1/math.sqrt(2))]])
         omega =  matrix.complexMatrix([[(2,0),(1,1)],[(1,-1),(3,0)]])
         omegaKet = omega.action(ket3)
         esd = ket3.innerProduct(omegaKet)
-        esd.showNumber()
-        print('braket')
-        '''
-
-
-
+        nSol = 1.50
+        esd = round(esd.partReal,2)
+        self.assertAlmostEqual(nSol,esd)
 
 if __name__ == '__main__':
     unittest.main()

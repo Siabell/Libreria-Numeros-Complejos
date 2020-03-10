@@ -56,7 +56,9 @@ This library implements the following operations:
 
 - Calculate the state before n "clicks" of a system giving the adjacency matrix, the initial state vector and a number n that represent the number of "clicks".
 - Plots the probabilities of a state vector
-- calculates the probability of a state vector
+- calculate the probability of a state vector
+- Calculate the probability of finding a particle at a particular position.
+- The probability of transiting from the first vector to the second.
 
 Also simulates the experiment of:
 

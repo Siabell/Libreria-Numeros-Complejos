@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 def particleProbability(ket,position):
+    """ calcular la probabilidad de encontrar la particula en una posición en particular"""
     m = matrix.getRows(ket) #rows
     n = matrix.getColumns(ket) #column
     ketM = matrix.getMtx(ket)
@@ -18,11 +19,12 @@ def particleProbability(ket,position):
     pxi = ci/sum 
     return round (pxi,4)
 
-def normalize(vector):
-    length = vector.norm()
-    m = matrix.getRows(vector) #rows
-    n = matrix.getColumns(vector) #column
-    ketM = matrix.getMtx(vector)
+def normalize(ket):
+    """Normaliza un vector ket, dividiendo a las entradas por la longitud del vector """
+    length = ket.norm()
+    m = matrix.getRows(ket) #rows
+    n = matrix.getColumns(ket) #column
+    ketM = matrix.getMtx(ket)
     for i in range (m):
         for j in range (n):
             temp = ketM[i][j]
@@ -33,6 +35,7 @@ def normalize(vector):
 
 
 def transitionAmplitude(ketIni,ketFin):
+    """Dados dos vectores ket (inicial y final ) calcula la probabilidad de transitar del primer vector al segundo."""
     ket1M = normalize(ketIni)
     ket2M = normalize(ketFin)
     braket = ket2M.innerProduct(ket1M)
