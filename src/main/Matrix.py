@@ -3,34 +3,14 @@ import sys
 import ComplexNumber as complex
 import sympy 
 from sympy import *
+import matplotlib.pyplot as plt
+import numpy as np
 
 class Matrix:
     def __init__(self, pmatrix):
         self.mtx =pmatrix
         self.m = len(pmatrix) #rows
         self.n = len(pmatrix[0]) #column
-
-    def booleanMatrix(self,pmatrix):
-        matrixBoolean= [[complex.ComplexNumber(0,0) for x in range(pmatrix.n)] for y in range(pmatrix.m)] 
-        for i in range (pmatrix.m):
-            for j in range (pmatrix.n):
-                matrixBoolean[i][j] = complex.ComplexNumber(pmatrix[i][j], 5)
-        return Matrix(matrixBoolean)
-
-    def realMatrix(self):
-        matrixR= [[complex.ComplexNumber(0,0) for x in range(self.n)] for y in range(self.m)] 
-        for i in range (self.m):
-            for j in range (self.n):
-                matrixR[i][j] = complex.ComplexNumber(self[i][j], 5)
-        return Matrix(matrixR)    
-    
-    def ComplexMatrix(self):
-        matrixC= [[complex.ComplexNumber(0,0) for x in range(self.n)] for y in range(self.m)] 
-        for i in range (self.m):
-            for j in range (self.n):
-                matrixC[i][j] = complex.ComplexNumber(self[i][j][0], self[i][j][1])
-        return Matrix(matrixC) 
-
 
     def add (self, mat2):
         """ Suma de dos matrices/vectores """
@@ -230,6 +210,7 @@ class Matrix:
         return result
 
     def equalsList(self,list2):
+        """ retorna el resultado de comparar si dos listas son iguales""" 
         result = True
         if (self.length!= list2.length):
             raise Exception('The dimensions of the lists are not the same ')
@@ -239,6 +220,7 @@ class Matrix:
         return result
 
     def show(self):
+        """ imprime una matriz""" 
         for i in range(self.m):
             strRow=""
             for j in range(self.n):
@@ -246,26 +228,75 @@ class Matrix:
                 #print(self.mtx[i][j].showNumber()+"numero")
             print(strRow)
 
-
-    def determinante (self, x, num):
-        mat = self
-        mat.show()
-        print("------------------")
-        for i in range(num):
-            
-            temp = self.multiplication(mat)
-            #temp.show()
-            mat = temp
-        mat.show()
-        print("hola yo")
-        return x.multiplication(mat)
-
-    def marbleMove (self,x,num):
+    def marbleMove (self,x,n):
+        """ Dada una matriz con la dinamica de un sistema, un vector x
+        que representa un estado y un numero n, retorna el estado del
+        sistema despues de n clicks o movimientos """ 
         mMoves = self
-        for i in range(1,num):
+        for i in range(1,n):
             temp = mMoves.multiplication(self)
             mMoves = temp
         vState = mMoves.multiplication(x)
         return vState
 
 
+    def probability(self):
+        """ Retorna un vector con la probabilidad de un vector de estado,
+        donde cada entrada es el resultado del modulo del numero 
+        elevado al cuadrado""" 
+        matrixResult = [0 for x in range(self.m)] 
+        for i in range (self.m):
+            prob = 0
+            for j in range (self.n):
+                prob = round(math.pow(self.mtx[i][j].modulus(),2),5)
+            matrixResult[i] = prob
+        return matrixResult
+
+# Creadores de matrices
+def booleanMatrix(pmatrix):
+    """ Crea una matriz con entradas de numeros booleanos y retorna la 
+    matrix creada""" 
+    m = len(pmatrix) #rows
+    n = len(pmatrix[0]) #column
+    matrixBoolean= [[complex.ComplexNumber(0,0) for x in range(n)] for y in range(m)] 
+    for i in range (m):
+        for j in range (n):
+            matrixBoolean[i][j] = complex.ComplexNumber(pmatrix[i][j], 0)
+    return Matrix(matrixBoolean)
+
+def realMatrix(self):
+    """ Crea una matriz con entradas de numeros reales y retorna la 
+    matrix creada""" 
+    m = len(self) #rows
+    n = len(self[0]) #column
+    matrixR= [[complex.ComplexNumber(0,0) for x in range(n)] for y in range(m)] 
+    for i in range (m):
+        for j in range (n):
+            matrixR[i][j] = complex.ComplexNumber(self[i][j], 0)
+    return Matrix(matrixR)    
+
+def complexMatrix(self):
+    """ Crea una matriz con entradas de numeros complejos y retorna la 
+    matrix creada""" 
+    m = len(self) #rows
+    n = len(self[0]) #column
+    matrixC= [[complex.ComplexNumber(0,0) for x in range(n)] for y in range(m)] 
+    for i in range (m):
+        for j in range (n):
+            matrixC[i][j] = complex.ComplexNumber(self[i][j][0], self[i][j][1])
+    return Matrix(matrixC) 
+
+def plot_bar(valuesY, valuesX,labelY,labelX,graphicName):
+    """ Crea una grafica de barras dados los valores de:
+    valuesY: valores en el eje y
+    valuesX: valores en el eje x
+    LabelY: nombre que representa eje y
+    LabelX: nombre que representa eje x
+    graphicName: nombre de la grafica""" 
+    index = np.arange(len(valuesY))
+    plt.bar(index, valuesX)
+    plt.xlabel(labelX, fontsize=5)
+    plt.ylabel(labelY, fontsize=5)
+    plt.xticks(index, valuesY, fontsize=5, rotation=30)
+    plt.title(graphicName)
+    plt.show()

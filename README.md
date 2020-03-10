@@ -48,6 +48,22 @@ This library has the following operations with complex vectors/matrices
 - Tensor Product of Matrix/Vector 
 - Eigen Values of a Matrix
 
+## Classical to Quantum
+
+Representing a (weighted) graph with n vertex as an adjacency matrix. The matrix will tell the dynamic of the system ( How it change ). These weights describe the probability of our marble moving from one vertex to another in one time click.
+The state (vector) of the system will tell us the probabilities of being on each vertex.
+This library implements the following operations:
+
+- Calculate the state before n "clicks" of a system giving the adjacency matrix, the initial state vector and a number n that represent the number of "clicks".
+- Plots the probabilities of a state vector
+- calculates the probability of a state vector
+
+Also simulates the experiment of:
+
+- The marble experiments with Boolean coefficient
+- Classic probabilistic three-slit experiment
+- Quantum multiple-slit experiment.
+
 ## Getting Started
 
  In order to use this project, first clone this repository or download the project.
@@ -61,6 +77,14 @@ To get sympy use the following command
 ```
 pip install sympy
 ```
+To get numpy use the following command 
+```
+pip install numpy
+```
+To get matplotlib use the following command 
+```
+pip install matplotlib
+```
 To execute the library you can use IDLE python
 
 ## Running the tests
@@ -70,8 +94,14 @@ In order to run the tests of this library go to the folder src and then folder m
 ```
 py MatrixTest.py
 py ComplexNumberTest.py
+py classicToQuantumTest.py
 ```
-![test](images/test.PNG)
+
+![test](images/tests.PNG)
+
+* Quantum double-slit experiment probability plot bar in classicToQuantumTest
+
+![graficaDoubleSlit](images/graphicDoubleSlit.PNG)
 
 ## Built With
 
