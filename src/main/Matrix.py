@@ -196,7 +196,7 @@ class Matrix:
         resultValues = []
         for key,value in values.items():
             for nRepetidos in range(value):
-                #print(key)
+                print(key)
                 resultValues.append(complex.ComplexNumber(sympy.re(key),sympy.im(key)))
         return resultValues
 
@@ -296,6 +296,19 @@ def complexMatrix(self):
         for j in range (n):
             matrixC[i][j] = complex.ComplexNumber(self[i][j][0], self[i][j][1])
     return Matrix(matrixC) 
+
+def identityMatrix(rows, colums):
+    """Crear una matriz de identidad (solo las entradas diferentes a cero
+    pertenecen a la diagonal) de filas rows y columnas columns"""
+    m = rows #rows
+    n = colums #column
+    matrixC= [[complex.ComplexNumber(0,0) for x in range(n)] for y in range(m)] 
+    for i in range (m):
+        for j in range (n):
+            if i ==j:
+                matrixC[i][j] = complex.ComplexNumber(1, 0)
+    return Matrix(matrixC) 
+
 
 def plot_bar(valuesY, valuesX,labelY,labelX,graphicName):
     """ Crea una grafica de barras dados los valores de:

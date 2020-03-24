@@ -46,6 +46,23 @@ def transitionAmplitude(ketIni,ketFin):
     amplitud = braket.division(productC)
     return amplitud
 
+def expectedValue(observable, state):
+    """El valor esperado de observar un observable repetidamente en el mismo estado"""
+    observableState = observable.action(state)
+    value = state.innerProduct(observableState)
+    return value
+
+def variance(omega, ket):
+    """Variance"""
+    expectedVal = expectedValue(omega, ket)
+    identity = matrix.identityMatrix(matrix.getRows(omega), matrix.getColumns(omega))
+    matrixExpected = identity.scalarMultiplication(expectedVal)
+    hermitianOp = omega.subtract(matrixExpected)
+    HermitCuadrado = hermitianOp.multiplication(hermitianOp)
+    expectedResult = expectedValue(HermitCuadrado,ket)
+    return expectedResult
+
+
 
 
     

@@ -95,14 +95,37 @@ class classicToQuantumTest(unittest.TestCase):
         self.assertAlmostEqual(braket.partReal,mSol.partReal)
         self.assertAlmostEqual(braket.partImag,mSol.partImag)
         
-    def testExpectedValue(self):
+    def testSloudCalculateExpectedValue(self):
         ket3 = matrix.complexMatrix([[(1/math.sqrt(2),0)],[(0,1/math.sqrt(2))]])
         omega =  matrix.complexMatrix([[(2,0),(1,1)],[(1,-1),(3,0)]])
-        omegaKet = omega.action(ket3)
-        esd = ket3.innerProduct(omegaKet)
+        esd = qm.expectedValue(omega,ket3)
         nSol = 1.50
         esd = round(esd.partReal,2)
         self.assertAlmostEqual(nSol,esd)
+
+        ket = matrix.complexMatrix([[(math.sqrt(2)/2,0)],[(0,math.sqrt(2)/2)]])
+        omega =  matrix.complexMatrix([[(1,0),(0,-1)],[(0,1),(2,0)]])
+        esd = qm.expectedValue(omega,ket)
+        nSol = 2.5
+        esd = round(esd.partReal,1)
+        self.assertAlmostEqual(nSol,esd)
+
+
+    def testShouldCalculateVariance(self):
+        ket = matrix.complexMatrix([[(math.sqrt(2)/2,0)],[(0,math.sqrt(2)/2)]])
+        omega =  matrix.complexMatrix([[(1,0),(0,-1)],[(0,1),(2,0)]])
+        result = qm.variance(omega,ket)
+        nSol = 0.25
+        result = round(result.partReal,2)
+        self.assertAlmostEqual(nSol,result)
+
+
+        ket = matrix.complexMatrix([[(1/math.sqrt(2),0)],[(0,1/math.sqrt(2))]])
+        omega =  matrix.complexMatrix([[(0,0),(0,-1)],[(0,1),(0,0)]])
+        result = qm.variance(omega,ket)
+        nSol = 0
+        result = round(result.partReal,0)
+        self.assertAlmostEqual(nSol,result)
 
 if __name__ == '__main__':
     unittest.main()
