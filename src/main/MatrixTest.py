@@ -193,8 +193,8 @@ class ComplexNumberTest(unittest.TestCase):
         #resultado.show()
 
     def testShouldGeteigenValues(self):
-        self.assertTrue(True)
-        """mSol =  matrix.Matrix([[complex.ComplexNumber(1, 0), complex.ComplexNumber(-3, 0),complex.ComplexNumber(3, 0)], [complex.ComplexNumber(3, 0), complex.ComplexNumber(-5,0),complex.ComplexNumber(3, 0)],[complex.ComplexNumber(6, 0), complex.ComplexNumber(-6, 0),complex.ComplexNumber(4, 0)]])
+        
+        mSol =  matrix.Matrix([[complex.ComplexNumber(1, 0), complex.ComplexNumber(-3, 0),complex.ComplexNumber(3, 0)], [complex.ComplexNumber(3, 0), complex.ComplexNumber(-5,0),complex.ComplexNumber(3, 0)],[complex.ComplexNumber(6, 0), complex.ComplexNumber(-6, 0),complex.ComplexNumber(4, 0)]])
         listValues = mSol.eigenValues()
         listSolutio = [complex.ComplexNumber(4, 0), complex.ComplexNumber(-2, 0),complex.ComplexNumber(-2, 0)]
         result = True
@@ -202,14 +202,14 @@ class ComplexNumberTest(unittest.TestCase):
             raise Exception('The dimensions of the lists are not the same ')
         for i in range(len(listValues)):
             if(listValues[i].partReal != listSolutio[i].partReal or listValues[i].partImag != listSolutio[i].partImag):
-                result = False"""
+                result = False
+        self.assertTrue(result)
 
-        mSol =  matrix.Matrix([[complex.ComplexNumber(1, 0), complex.ComplexNumber(0, -1/2),complex.ComplexNumber(0, 0),complex.ComplexNumber(-3/2, 0)], 
-        [complex.ComplexNumber(0, 1/2), complex.ComplexNumber(1, 0),complex.ComplexNumber(3/2, 0),complex.ComplexNumber(0, 0)]
-        ,[complex.ComplexNumber(0, 0), complex.ComplexNumber(3/2,0),complex.ComplexNumber(1, 0),complex.ComplexNumber(0, -1/2)],
-        [complex.ComplexNumber(-3/2, 0), complex.ComplexNumber(0, 0),complex.ComplexNumber(0, 1/2),complex.ComplexNumber(1, 0)]
-        ])
-        mSol.eigenValues()
+    def testShouldGeteigenVectors(self):
+        mVectors =  matrix.Matrix([[complex.ComplexNumber(0, 0), complex.ComplexNumber(1, 0)],
+        [complex.ComplexNumber(1, 0), complex.ComplexNumber(0,0)]])
+        vectors=mVectors.eigenVectors()
+
 
 if __name__ == '__main__':
     unittest.main()

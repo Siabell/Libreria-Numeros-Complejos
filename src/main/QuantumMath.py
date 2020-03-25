@@ -52,8 +52,14 @@ def expectedValue(observable, state):
     value = state.innerProduct(observableState)
     return value
 
+def mean(observable, state):
+    """La media de observar un observable repetidamente en el mismo estado"""
+    observableState = observable.action(state)
+    value = state.innerProduct(observableState)
+    return value
+
 def variance(omega, ket):
-    """Variance"""
+    """Varianza:  la dispersión de la distribución en torno a su valor esperado """
     expectedVal = expectedValue(omega, ket)
     identity = matrix.identityMatrix(matrix.getRows(omega), matrix.getColumns(omega))
     matrixExpected = identity.scalarMultiplication(expectedVal)
@@ -62,6 +68,15 @@ def variance(omega, ket):
     expectedResult = expectedValue(HermitCuadrado,ket)
     return expectedResult
 
+def HermitianVarianceAndMean(omega,ket):
+    """Revisa que la matriz (observable) sea hermitiana, y si lo es, calcula la media
+    y la varianza del observable en el estado dado y los retorna."""
+    if (omega.isHermitian()==False):
+        raise Exception('The matrix is not hermitian ')
+    else:
+        var = variance(omega,ket)
+        meanVal = mean(omega, ket)
+        return (meanVal, var)
 
 
 

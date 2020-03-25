@@ -186,7 +186,7 @@ class Matrix:
         return matrixResult
     
     def eigenValues(self):
-        """ retorna los vectores propios de una matriz""" 
+        """ retorna los valores propios de una matriz""" 
         SympyMatrix = [[complex.ComplexNumber(0,0) for x in range(self.n)] for y in range(self.m)] 
         for i in range (self.m):
             for k in range (self.n):
@@ -196,9 +196,33 @@ class Matrix:
         resultValues = []
         for key,value in values.items():
             for nRepetidos in range(value):
-                print(key)
+                #print(key)
                 resultValues.append(complex.ComplexNumber(sympy.re(key),sympy.im(key)))
         return resultValues
+
+    def eigenVectors(self):
+        """ retorna los vectores propios de una matriz""" 
+        SympyMatrix = [[complex.ComplexNumber(0,0) for x in range(self.n)] for y in range(self.m)] 
+        for i in range (self.m):
+            for k in range (self.n):
+                SympyMatrix[i][k] = ((self.mtx[i][k].partReal)+(self.mtx[i][k].partImag*1j))
+        matResult = sympy.Matrix(SympyMatrix)
+        vectors = matResult.eigenvects()
+        resultVectors = [Matrix([[]]) for i in range(len(vectors))]   
+        #print(vectors)
+        for i in range(len(vectors)):
+            eigenVect = vectors[i][2]
+            #print(vectors[i][2])
+            complexEigenVect = [[complex.ComplexNumber(0,0)] for j in range (len(eigenVect[0]))]
+            for j in range(len(eigenVect)):
+                for x in range(len(eigenVect[j])):
+                    print(eigenVect[j][x])
+                    valEigenVect = eigenVect[j][x]
+                    comValEigenVect = complex.ComplexNumber(sympy.re(valEigenVect),sympy.im(valEigenVect))
+            
+            resultVectors[i] = Matrix(complexEigenVect)
+        print(resultVectors)
+        return resultVectors
 
     def equals(self,mat2):
         """ Compara si los elementos de las matrices son iguales """
