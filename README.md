@@ -54,17 +54,26 @@ Representing a (weighted) graph with n vertex as an adjacency matrix. The matrix
 The state (vector) of the system will tell us the probabilities of being on each vertex.
 This library implements the following operations:
 
-- Calculate the state before n "clicks" of a system giving the adjacency matrix, the initial state vector and a number n that represent the number of "clicks".
+- Calculates the state before n "clicks" of a system giving the adjacency matrix, the initial state vector and a number n that represent the number of "clicks".
 - Plots the probabilities of a state vector
-- calculate the probability of a state vector
-- Calculate the probability of finding a particle at a particular position.
-- The probability of transiting from the first vector to the second.
+- calculates the probability of a state vector
 
 Also simulates the experiment of:
 
 - The marble experiments with Boolean coefficient
 - Classic probabilistic three-slit experiment
 - Quantum multiple-slit experiment.
+
+## Basic Quantun Theory
+
+The basic Quantum theory associates a vector space to a quantum system. The dimension of this space reflects the amount of basic states of the system. The states can be superposed, by adding their representing vectors. The state space has  a geometry, given by its inner product, it tells us the likelihood for a given state to transition into another one after being measured. Also Observables are represented by hermitian operators. The result of an observation is an eigenvalue of the hermitian.
+This library implements the following operations of quantum systems:
+
+- Calculates the probability of finding a particle at a particular position.
+- The probability of transiting from the first vector to the second.
+- Calculate the variance and mean of an observable.
+- A function checks if a matrix is hermitian, and if it is, it calculates the mean and the variance of the observable in the given state.
+- calculates the eigenvalues of an observable and the probability that the system transitions to one of the eigenvectors after the observation.
 
 ## Getting Started
 
@@ -97,6 +106,7 @@ In order to run the tests of this library go to the folder src and then folder m
 py MatrixTest.py
 py ComplexNumberTest.py
 py classicToQuantumTest.py
+py QuantumMathTest.py
 ```
 
 ![test](images/tests.PNG)

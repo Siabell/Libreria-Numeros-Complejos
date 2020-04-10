@@ -78,6 +78,26 @@ def HermitianVarianceAndMean(omega,ket):
         meanVal = mean(omega, ket)
         return (meanVal, var)
 
+def probabilityForAStateToCollapseIntoAnEigenVentor(omega, startState):
+    ''' La probabilidad de que un estado inicial colapse 
+    en un vector propio de lo observable viene dada por la 
+    longitud al cuadrado de la proyección (la projection 
+    es el cuadrado del inner product de los dos estados normalizados)
+    Esta funcion calcula los valores propios y la probabilidad
+    que el estado inicial transite a alguno de ellos.'''
+    eigenVectors = omega.eigenVectors()
+    eigenVectorsProbabilities = [0 for x in range(len(eigenVectors))]
+    startNormalize = normalize(startState)
+    #Proyeccion es la probabilidad
+    for i in range(len(eigenVectors)):
+        eigenVectorNormalize = normalize(eigenVectors[i])
+        projection = startNormalize.innerProduct(eigenVectorNormalize)
+        probability = pow(projection.modulus(),2)
+        eigenVectorsProbabilities[i] = probability
+    return eigenVectorsProbabilities
+
+
+
 
 
     

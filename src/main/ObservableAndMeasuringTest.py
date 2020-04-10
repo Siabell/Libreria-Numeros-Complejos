@@ -11,29 +11,41 @@ import QuantumMath as qm
 
 class ObservableAndMeasuringTest(unittest.TestCase):
     
-    def testExcerise441(self):
+    def testExercise431(self):
+        print("--- Exercise 4.3.1")
+        mState =  matrix.complexMatrix([[(0,0),(1,0)],[(1,0),(0,0)]])
+        eigenVectors = mState.eigenVectors()
+        print("The eigen Vectors")
+        for i in range(2):
+            eigenVectors[i].show()
+            print("")
+            
+
+
+    def testExercise441(self):
+        print("\n--- Exercise 4.4.1")
         u1 =  matrix.complexMatrix([[(0,0),(1,0)],[(1,0),(0,0)]])
         u2 = matrix.complexMatrix([[(math.sqrt(2)/2,0),(math.sqrt(2)/2,0)],[(math.sqrt(2)/2,0),(-math.sqrt(2)/2,0)]])
-        print(u1.isUnitary())
-        print(u2.isUnitary())
+        u1Unitary = "The u1 matrix is unitary: "+ str(u1.isUnitary())
+        u2Unitary = "The u2 matrix is unitary: "+ str(u2.isUnitary())
+        print(u1Unitary)
+        print(u2Unitary)
         u1yu2 = u1.multiplication(u2)
-        print(u1yu2.isUnitary())
+        u1yu2Unitary = "The product of the matrices is unitary: "+ str(u1yu2.isUnitary())
+        print(u1yu2Unitary)
 
-    def testShouldCalculateVariance(self):
-        ket = matrix.complexMatrix([[(math.sqrt(2)/2,0)],[(0,math.sqrt(2)/2)]])
-        omega =  matrix.complexMatrix([[(1,0),(0,-1)],[(0,1),(2,0)]])
-        result = qm.variance(omega,ket)
-        nSol = 0.25
-        result = round(result.partReal,2)
-        self.assertAlmostEqual(nSol,result)
-
-
-        ket = matrix.complexMatrix([[(1/math.sqrt(2),0)],[(0,1/math.sqrt(2))]])
-        omega =  matrix.complexMatrix([[(0,0),(0,-1)],[(0,1),(0,0)]])
-        result = qm.variance(omega,ket)
-        nSol = 0
-        result = round(result.partReal,0)
-        self.assertAlmostEqual(nSol,result)
+    def testExercise442(self):
+        print("\n--- Exercise 4.4.2")
+        stateVector = matrix.realMatrix([[1],[0],[0],[0]])
+        matrixDynamic = matrix.complexMatrix([
+        [(0,0),(1/math.sqrt(2),0),(1/math.sqrt(2),0),(0,0)],
+        [(0,1/math.sqrt(2)),(0,0),(0,0),(1/math.sqrt(2),0)],
+        [(1/math.sqrt(2),0),(0,0),(0,0),(0,1/math.sqrt(2))],
+        [(0,0),(1/math.sqrt(2),0),(-1/math.sqrt(2),0),(0,0)]])
+        stateOfSystem3 = matrixDynamic.marbleMove(stateVector,3)
+        probability = qm.particleProbability(stateOfSystem3,3)
+        probabilityPos = "The chance of the quantum ball to be found at point 3 is : "+str(probability)
+        print(probabilityPos)
 
 if __name__ == '__main__':
     unittest.main()

@@ -216,12 +216,11 @@ class Matrix:
             complexEigenVect = [[complex.ComplexNumber(0,0)] for j in range (len(eigenVect[0]))]
             for j in range(len(eigenVect)):
                 for x in range(len(eigenVect[j])):
-                    print(eigenVect[j][x])
+                    #print(eigenVect[j][x])
                     valEigenVect = eigenVect[j][x]
                     comValEigenVect = complex.ComplexNumber(sympy.re(valEigenVect),sympy.im(valEigenVect))
-            
+                    complexEigenVect[x][0] = comValEigenVect
             resultVectors[i] = Matrix(complexEigenVect)
-        print(resultVectors)
         return resultVectors
 
     def equals(self,mat2):

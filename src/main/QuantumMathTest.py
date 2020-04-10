@@ -60,7 +60,43 @@ class QuantumMathTest(unittest.TestCase):
         result = round(result.partReal,0)
         self.assertAlmostEqual(nSol,result)
 
-    
+    def testShouldVerifiedIfObservableisHermitianAndCalculateMeanAndVariance(self):
+        omega =  matrix.complexMatrix([[(0,0),(0,-1)],[(0,1),(0,0)]])
+        ket = matrix.complexMatrix([[(1/math.sqrt(2),0)],[(0,1/math.sqrt(2))]])
+        mean,variance = qm.HermitianVarianceAndMean(omega,ket)
+        varianceSol = 0
+        meanSol = 1
+        variance = round(variance.partReal,0)
+        mean = round(mean.partReal,0)
+        self.assertAlmostEqual(varianceSol,variance)
+        self.assertAlmostEqual(meanSol,mean)
+
+        #noHermitianMatriz
+        omega =  matrix.complexMatrix([[(0,7),(0,-1)],[(0,1),(0,0)]])
+        ket = matrix.complexMatrix([[(1/math.sqrt(2),0)],[(0,1/math.sqrt(2))]])
+        HermitianMatrix = True
+        try:
+            variance,mean = qm.HermitianVarianceAndMean(omega,ket)
+        except:
+            HermitianMatrix = False
+        self.assertFalse(HermitianMatrix)
+
+    def testeigenValuesAndEigenVectorsProbability(self):
+        omega = matrix.complexMatrix([[(-1,0),(0,-1)],[(0,1),(1,0)]])
+        startState = matrix.complexMatrix([[(1/2,0)],[(1/2,0)]])
+        #Valores Propios
+        eigenValues = omega.eigenValues()
+        solutionEigenValues = [complex.ComplexNumber(-math.sqrt(2),0),complex.ComplexNumber(math.sqrt(2),0)]
+        for i in range(len(eigenValues)):
+            solutionEigenValues[i]
+            solutionEigenValues[i]
+        #Vectores Propios
+        eigenVectorsProbabilities = qm.probabilityForAStateToCollapseIntoAnEigenVentor(omega,startState)
+        solutionProbabilities=[0.5,0.5]
+        for i in range(len(eigenVectorsProbabilities)):
+            probability = round(eigenVectorsProbabilities[i],2)
+            self.assertAlmostEqual(probability,solutionProbabilities[i])
+
 
 if __name__ == '__main__':
     unittest.main()
