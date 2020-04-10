@@ -109,7 +109,7 @@ py classicToQuantumTest.py
 py QuantumMathTest.py
 ```
 
-![test](images/tests.PNG)
+![test](images/testsQ.PNG)
 
 * Quantum double-slit experiment probability plot bar in classicToQuantumTest
 
